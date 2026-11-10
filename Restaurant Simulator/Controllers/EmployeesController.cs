@@ -116,7 +116,7 @@ namespace Restaurant_Simulator.Controllers
                 // Untuk Mengecek apakah email sudah digunakan atau belum
                 var EmailExits = await dbc.Employees.AnyAsync(e => e.Email == result.Email && e.EmployeeId != id);
 
-                if (EmailExits == null)
+                if (EmailExits)
                 {
                     return Conflict("Email Already Used");
                 }
@@ -129,6 +129,9 @@ namespace Restaurant_Simulator.Controllers
                 employee.Salary = result.Salary;
                 employee.HireDate = result.HireDate;
                 employee.IsActive = result.IsActive;
+
+                // update
+                dbc.Employees.Update(employee);
 
                 // perubahan pada database
                 await dbc.SaveChangesAsync();

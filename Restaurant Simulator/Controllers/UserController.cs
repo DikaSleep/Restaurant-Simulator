@@ -103,6 +103,8 @@ namespace Restaurant_Simulator.Controllers
                 user.PasswordHash = hash.HashPassword(user, result.Password);
             }
 
+            dbc.Users.Update(user);
+
             // Menyimpan dalam Database
             await dbc.SaveChangesAsync();
 
