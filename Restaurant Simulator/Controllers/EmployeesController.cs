@@ -116,7 +116,7 @@ namespace Restaurant_Simulator.Controllers
                 // Untuk Mengecek apakah email sudah digunakan atau belum
                 var EmailExits = await dbc.Employees.AnyAsync(e => e.Email == result.Email && e.EmployeeId != id);
 
-                if (EmailExits)
+                if (!EmailExits)
                 {
                     return Conflict("Email Already Used");
                 }
